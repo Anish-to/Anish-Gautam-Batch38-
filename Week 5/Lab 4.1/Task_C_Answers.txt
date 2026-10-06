@@ -1,0 +1,82 @@
+TASK C: MAPPING STATIC TEXT AND DATA SECTION BOUNDS
+
+Question 1:
+What does elf64-........... reveal about hardware architecture, address sizing, and byte serialization?
+
+Answer:
+The executable is identified as elf64-littleaarch64.
+
+ELF64 means that the executable uses the 64-bit Executable and Linkable Format.
+AArch64 means that it is compiled for the 64-bit ARM architecture.
+The word "little" means that the system uses little-endian byte ordering, where the least significant byte is stored at the lowest memory address.
+
+
+Question 2:
+Extract the .text section boundaries. Does the check_execution() runtime address fit within this range?
+
+Answer:
+The .text section boundaries from my actual GDB output are:
+
+Start: 0x0000aaaaaaaa06c0
+End:   0x0000aaaaaaaa087c
+
+Therefore, the .text section occupies the virtual address range from 0x0000aaaaaaaa06c0 up to, but not including, 0x0000aaaaaaaa087c.
+
+The check_execution() function address obtained in Task B should be within this range if it belongs to the .text section.
+
+
+Question 3:
+Locate the .rodata boundaries. Does the string literal pointer fit within this range?
+
+Answer:
+The .rodata section boundaries from my actual GDB output are:
+
+Start: 0x0000aaaaaaaa0898
+End:   0x0000aaaaaaaa0990
+
+The string literal pointer from Task B is:
+
+0xaaaaaaaa0888
+
+Comparing the addresses:
+
+0xaaaaaaaa0888 < 0x0000aaaaaaaa0898
+
+Therefore, based strictly on my actual GDB section map, the string literal pointer does NOT fall within the displayed .rodata range.
+
+This differs from the sample output in the lab PDF, so the actual GDB output from my executable is used for this answer.
+
+
+Question 4:
+Locate the .data boundaries. Does the global variable address fit within this range?
+
+Answer:
+The .data section boundaries are:
+
+Start: 0x0000aaaaaaac0000
+End:   0x0000aaaaaaac0020
+
+The global variable address from Task B is:
+
+0xaaaaaaac0010
+
+Since:
+
+0x0000aaaaaaac0000 <= 0xaaaaaaac0010 < 0x0000aaaaaaac0020
+
+the global initialized variable is located inside the .data section.
+
+
+Question 5:
+Analyze the .data versus .bss sections. Which one occupies the lower memory range?
+
+Answer:
+The .data section is:
+
+0x0000aaaaaaac0000 - 0x0000aaaaaaac0020
+
+The .bss section is:
+
+0x0000aaaaaaac0020 - 0x0000aaaaaaac0028
+
+Therefore, the .data section occupies the lower memory range, and the .bss section starts immediately after the .data section.

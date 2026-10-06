@@ -1,0 +1,7 @@
+TASK A: BUILDING WITH DEBUGGING SYMBOLS
+
+Question:
+Why is the -g flag used when compiling the program?
+
+Answer:
+The -g flag adds debugging information to the compiled executable. This allows GDB to identify source-level functions, variables and line numbers and helps us inspect their memory addresses during debugging.

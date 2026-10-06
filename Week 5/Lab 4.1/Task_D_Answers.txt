@@ -1,0 +1,43 @@
+TASK D: INSPECTING RAW MEMORY AND DATA VALUES
+
+Question:
+Review the output of the examine command.
+
+Answer:
+The command:
+
+x/wx &data_global_var
+
+shows the memory address of data_global_var and the raw hexadecimal value stored at that address.
+
+The output is:
+
+0xaaaaaaac0010 <data_global_var>: 0x12345678
+
+This confirms that data_global_var is stored at address 0xaaaaaaac0010 and contains the initialized value 0x12345678.
+
+The command:
+
+x/s text_string_literal
+
+shows the string stored at the address pointed to by text_string_literal:
+
+" Text_Segment_Verification"
+
+The command:
+
+print &text_string_literal
+
+shows the address of the pointer variable itself:
+
+0xaaaaaaac0018
+
+Therefore, the GDB examine commands allow us to inspect the actual contents stored in memory rather than only viewing the source-level variables.
+
+
+Additional Observation:
+The command x/4bx &data_global_var shows the individual bytes stored in memory. For the value 0x12345678, a little-endian system stores the bytes in the order:
+
+0x78 0x56 0x34 0x12
+
+This confirms little-endian byte ordering.

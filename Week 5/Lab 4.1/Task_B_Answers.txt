@@ -1,0 +1,36 @@
+TASK B: DEBUGGING AND MEMORY INSPECTION
+
+Question 1:
+What command is used to start GDB with the compiled program?
+
+Answer:
+The command used is:
+gdb ./demo2
+
+Question 2:
+What command is used to set a breakpoint?
+
+Answer:
+The command used is:
+break 22
+
+Question 3:
+What does the run command do?
+
+Answer:
+The run command starts execution of the program. GDB executes the program until it reaches the breakpoint, where execution is paused so that the program's memory and variables can be inspected.
+
+Question 4:
+What are the three important addresses printed by the program?
+
+Answer:
+The program prints the addresses of:
+1. The initialized global variable, which belongs to the Data segment.
+2. The string literal, which is stored in read-only data.
+3. The check_execution() function, which belongs to the Text segment.
+
+Question 5:
+Why are these addresses useful?
+
+Answer:
+These addresses allow us to verify where different types of program information are located in memory. The global variable should be associated with the Data segment, the string literal with read-only data, and the function code with the Text segment.
